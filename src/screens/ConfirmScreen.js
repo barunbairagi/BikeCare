@@ -111,6 +111,10 @@ bookingDataBundle = route.params;
         <Text style ={stylesConfirm.text_header}>RegistrationNo : {bookingDataBundle.RegistrationNo}</Text>
         <Text style ={stylesConfirm.text_header}>MobileNo : {bookingDataBundle.MobileNo}</Text>
         <Text style ={stylesConfirm.text_header}>Comments : {bookingDataBundle.comment}</Text>
+        <Text style ={stylesConfirm.text_header}>Net Payable = Basic Service Charge(Rs 300) + Engine Oil Price (if required)  
+        
+        </Text>
+        
           
       </View>
       <View style={stylesConfirm.button}>

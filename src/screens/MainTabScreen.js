@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/Ionicons';
+import HistIcon from 'react-native-vector-icons/Octicons';
 
 import ProfileScreen from './ProfileScreen';
 import DashboardScreen from './DashboardScreen';
@@ -9,6 +10,7 @@ import ExploreScreen from './ExploreScreen';
 import HomeScreen from './HomeScreen';
 import DetailsScreen from './DetailsScreen';
 import ConfirmScreen from './ConfirmScreen';
+import BookingHistoryScreen from './BookingHistoryScreen';
 import BookingScreenNavigator from '../navigator/BookingScreenNavigator';
 
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
@@ -206,13 +208,13 @@ const MainTabScreen=()=>{
       }}
     />
       <Tab.Screen
-      name="Booking"
-      component={BookingScreen}
+      name="BookingHistory"
+      component={BookingHistoryScreen}
       options={{
-        tabBarLabel: 'Explore',
+        tabBarLabel: 'History',
         tabBarColor: '#d02860',
         tabBarIcon: ({ color }) => (
-          <Icon name="ios-aperture" color={color} size={26} />
+          <HistIcon name="history" color={color} size={26} />
         ),
       }}
     />

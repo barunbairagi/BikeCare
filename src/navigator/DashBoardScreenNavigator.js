@@ -6,7 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import ServiceScreen from '../screens/ServiceScreen';
 import BookingScreen from '../screens/BookingScreen';
 import ConfirmScreen from '../screens/ConfirmScreen';
-import HistoryScreen from '../screens/HistoryScreen';
+import HistoryScreen from '../screens/BookingHistoryScreen';
 
 
 const dashBoardStackNavigator = createStackNavigator();
@@ -16,7 +16,7 @@ const DashBoardStackScreenNavigator = ({navigation}) => (
          <dashBoardStackNavigator.Screen name= {'ServiceScreen'} component ={ServiceScreen}/>
              <dashBoardStackNavigator.Screen name= {'BookingScreen'} component ={BookingScreen}/>
              <dashBoardStackNavigator.Screen name= {'Screen'} component ={BookingScreen}/>
-             <dashBoardStackNavigator.Screen name= {'HistoryScreen'} component ={HistoryScreen}/>
+             <dashBoardStackNavigator.Screen name= {'BookingHistoryScreen'} component ={BookingHistoryScreen}/>
     </dashBoardStackNavigator.Navigator>
 );
 

@@ -93,7 +93,7 @@ const DashboardScreen = ({navigation}) => {
             fontFamily: "RobotoRegular",
             marginTop: 5,
             marginLeft:10,
-            bottomMargin: 25,
+            marginBottom: 25,
             fontSize: 17,
           }}
         >
