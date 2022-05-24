@@ -14,7 +14,8 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
-  StyleSheet
+  StyleSheet,
+  ActivityIndicator
 } from 'react-native';
 
 import bgImage from '../assets/back2.png';
@@ -35,6 +36,9 @@ const LoginScreen = ({navigation}) => {
 const[signal, setSignal] = useState(false);
 const [loading, setLoading] = useState(false);
 const [hasError, setHasError] = useState(false);
+
+const [isShown, setIsShown] = useState(false);
+
   // Declaring state variables starts below ...
 
   const [fetchingData, setFetchingDataState] = React.useState({
@@ -150,9 +154,10 @@ const handleValidUser = (val) => {
 
     useEffect(()=>{
         console.log("Start of useEffect() Ln 129, Value of Signal =" + signal); 
+        setIsShown(true);
         fetch(data.loginFinalURL).then(async response=>{
-            if(response.status == 200) // Process Data
-            {
+              if (response.status >= 200 && response.status < 300)
+                {
                 response.json().then(data=>{
                     setFetchingDataState({
                         ...fetchingData,
@@ -167,14 +172,16 @@ const handleValidUser = (val) => {
                 });
                 if(JSON.stringify(fetchingData).length != 0)
                 {
-                    setTimeout(()=>{CompareUserDataFromService()}, 1000);
+                    setTimeout(()=>{CompareUserDataFromService()}, 100);
                 }
                 
 
             }
             else{
-
-                console.log("***** Error : Failure to call Service *****Error Code = " + response.Text);
+                Alert.alert('Network User!', 'Error :'+ response.statusText, [
+                    {text: 'Okay'}
+                ]);
+                return;
             }
 
         }).catch((err) => {
@@ -184,23 +191,25 @@ const handleValidUser = (val) => {
 
 const CompareUserDataFromService=()=>{
 
-console.log("Ln 145 Inside CompareUserDataFromService() : fetchingData = " + fetchingData.userNameService);
+//console.log("Ln 145 Inside CompareUserDataFromService() : fetchingData = " + fetchingData.userNameService);
 const foundUser={id: 0, username:'', password:'', userToken:''};
  if(data.username ==fetchingData.userNameService && data.password == fetchingData.userPwdService)   
    {
-    console.log("Ln 156 Inside CompareUserDataFromService()");
+    //console.log("Ln 156 Inside CompareUserDataFromService()");
     foundUser.id = fetchingData.userIdService;
     foundUser.username = fetchingData.userNameService;
     foundUser.password = fetchingData.userPwdService;
     foundUser.userToken = fetchingData.userTokenService;
 
   }
-  if ( foundUser.username.length == 0 || foundUser.password.length == 0  ) {
+  /*if ( foundUser.username.length == 0 || foundUser.password.length == 0  ) {
       Alert.alert('Invalid User!', 'Username or password is incorrect.', [
           {text: 'Okay'}
       ]);
       return;
   }
+  */
+  setIsShown(false);
   signIn(foundUser);
 }
  const loginHandle =()=> {
@@ -215,6 +224,7 @@ return (
   <View style={stylesLogIn.container}>
       <StatusBar backgroundColor='#009387' barStyle="light-content"/>
     <View style={stylesLogIn.header}>
+    <ActivityIndicator animating={signal} size="large" color="#3b63b3" />
         <Text style={stylesLogIn.text_header}>Welcome!</Text>
     </View>
     <Animatable.View 
@@ -255,7 +265,7 @@ return (
             : null}
         </View>
         { data.isValidUser ? null : 
-        <Animatable.View animation="fadeInLeft" duration={500}>
+        <Animatable.View animation="fadeInLeft" duration={100}>
         <Text style={stylesLogIn.errorMsg}>Username must be 4 characters long.</Text>
         </Animatable.View>
         }

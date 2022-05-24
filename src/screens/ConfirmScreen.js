@@ -1,6 +1,8 @@
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import { View, Text, Button, StyleSheet, SafeAreaView, TouchableOpacity,Alert } from 'react-native';
+import { NavigationActions, StackActions } from 'react-navigation';
+import { CommonActions } from '@react-navigation/native';
 
 const ConfirmScreen = ({navigation, route}) => {
   const [bookingData, setBookingData] = React.useState({
@@ -13,14 +15,20 @@ const ConfirmScreen = ({navigation, route}) => {
     bookingDatetime: '',
     comments: '',
     bookingStatus:'Success'
-})
+}) 
    onButtonPress = () => {
-    console.log("Ln 30 Inside onButtonPress()..");
-    navigation.navigate('DashBoardScreen');
+    console.log("Ln 30 Inside onButtonPress() inside Confirm Screen..");
+    //navigation.navigate('DashBoardScreen');
+    const resetAction = CommonActions.reset({
+      index: 0,
+      routes: [{ name: "DashBoardScreen" }]
+    });
+    navigation.dispatch(resetAction);
+    //navigation.reset([NavigationActions.navigate({routeName: 'DashBoardScreen'})], 0);
    }
    //onButtonPressFail
    onButtonPressFail = () => {
-    console.log("Ln 30 Inside onButtonPressFail()..");
+    console.log("Ln 30 Inside onButtonPressFail() inside Confirm Screen..");
     navigation.navigate('BookingScreen');
    }
 

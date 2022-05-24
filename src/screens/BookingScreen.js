@@ -23,8 +23,9 @@ import {
   SafeAreaView
   } from 'react-native';
   widthCalc: {(Dimensions.get('window').width)};
-
-const BookingScreen = ({navigation}) => {
+  
+  const BookingScreen = ({navigation}) => {
+  console.log("*** Inside BookingScreen  Constructor ****..");
 
   const [selectedStartDate, setSelectedStartDate] = useState(null);
   const [selectedEndDate, setSelectedEndDate] = useState(null);
@@ -35,8 +36,6 @@ const BookingScreen = ({navigation}) => {
   //setMobileNo
   const [number, onChangeNumber] = React.useState(null);
   const startDate  =  selectedStartDate ? selectedStartDate.toString() : new Date();
- 
-
   const [bookingData, setBookingData] = React.useState({
     bookingServiceDate: '',
     timeSlot: '',
@@ -44,6 +43,10 @@ const BookingScreen = ({navigation}) => {
     bikeModel: '',
     bikeRegNo:'',
     });
+    
+  //clearStateData();
+  
+
   const onDateChange = (date, type) => {
     //function to handle the date change
     if (type === 'END_DATE') {
@@ -90,6 +93,8 @@ const saveTimeSlot=(value) => {
     setTimeSlot(value);
   
 }
+
+/*
 const bookingServiceDateSelect = (val) => {
   if( val.trim().length >= 2 ) {
     // Trim the date only here.
@@ -100,6 +105,7 @@ const bookingServiceDateSelect = (val) => {
   });
   }
  }
+ */
   const TimeSlots = ["10 AM", "11 AM", "12 Noon", "1 PM","2 PM","3 PM","4 PM"];
   onButtonPress = () => {navigation.navigate('ConfirmScreen',{
     bookingDate: selectedStartDate, 
@@ -107,9 +113,11 @@ const bookingServiceDateSelect = (val) => {
     RegistrationNo: registrationNo,
     MobileNo: mobileNo,
     comment: comment});
+    //clearStateData();
       
  }
-  const SignupHandle = (data) => {
+
+ const SignupHandle = (data) => {
     if (selectedStartDate == null) {
       Alert.alert('Wrong Input!', 'Booking Date cannot be empty.', [
           {text: 'Okay'}

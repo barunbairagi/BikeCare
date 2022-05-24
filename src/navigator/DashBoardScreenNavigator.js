@@ -15,7 +15,6 @@ const DashBoardStackScreenNavigator = ({navigation}) => (
     <dashBoardStackNavigator.Navigator headerMode='none'>
          <dashBoardStackNavigator.Screen name= {'ServiceScreen'} component ={ServiceScreen}/>
              <dashBoardStackNavigator.Screen name= {'BookingScreen'} component ={BookingScreen}/>
-             <dashBoardStackNavigator.Screen name= {'Screen'} component ={BookingScreen}/>
              <dashBoardStackNavigator.Screen name= {'BookingHistoryScreen'} component ={BookingHistoryScreen}/>
     </dashBoardStackNavigator.Navigator>
 );
